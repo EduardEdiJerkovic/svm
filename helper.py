@@ -3,21 +3,19 @@ from models.constants import READING, ARITHMETIC, PRE, LOW, HIGH, POST
 from models.enums import Task, Condition
 
 def ExtractData(sheet):
-    i = 3
     data = []
-    while(True):
-        try:
-            sheet.cell_value(i, 0)
-        except IndexError:
-            break
+    for i in range(2, sheet.nrows):
+        sheet.cell_value(i, 0)
+
 
         f = Feature()
         f.name = sheet.cell_value(i, 0).strip()
         f.task = ExtractTask(sheet, i)
         f.condition = ExtractCondition(sheet, i)
+        f.order = int(sheet.cell_value(i, 3).strip())
+        f.isHrValid = ExtractHrValid(sheet, i)
+        f.isScValid = ExtractHrValid(sheet, i)
         data.append(f)
-
-        i += 1
 
     return data
 
@@ -39,3 +37,15 @@ def ExtractCondition(sheet, index):
         return Condition.LOW
     if value == HIGH:
         return Condition.HIGH
+
+def ExtractHrValid(sheet, index):
+    return ExtractFlag(sheet, index, 10) == 1
+
+def ExtractScValid(sheet, index):
+    return ExtractFlag(sheet, index, 11) == 1
+
+def ExtractFlag(sheet, row, column):
+    return int(sheet.cell_value(row, column).strip())
+
+
+    
