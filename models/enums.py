@@ -2,8 +2,8 @@ from enum import Enum
 
 class Condition(Enum):
     PRE = 0
-    EASY = 1
-    HARD = 2
+    LOW = 1
+    HIGH = 2
     POST = 3
 
 class Task(Enum):

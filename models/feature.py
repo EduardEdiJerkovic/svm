@@ -25,4 +25,4 @@ class Feature:
             self.fSc6 = fSc[5]
 
     def __repr__(self):
-        return "Feature({0}, {1})".format(self.name, self.task)
+        return "Feature({0}, {1}, {2})".format(self.name, self.task, self.condition)
