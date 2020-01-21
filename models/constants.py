@@ -1,0 +1,2 @@
+READING = "Reading"
+ARITHMETIC = "Arithmetic"
